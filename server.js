@@ -20,21 +20,8 @@ const server = http.createServer((req, res) => {
 
   const { slack_name, track } = query;
 
-  const timeZone = "Europe/Paris";
-  const options = {
-    timeZone: timeZone,
-    hour12: false,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const formatter = new Intl.DateTimeFormat("en-US", options);
-
   let datetime = new Date();
-  let utc_time = formatter.format(datetime);
+  let utc_time = datetime.toISOString().slice(0, -5) + "uu";
   let weekDay = dayOFTheWeek[datetime.getDay()];
 
   if (path.startsWith("/api")) {
