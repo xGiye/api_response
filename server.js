@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
   const { slack_name, track } = query;
 
   let datetime = new Date();
-  let utc_time = datetime.toISOString().slice(0, -5) + "uu";
+  let utc_time = datetime.toISOString().slice(0, -5) + "Z";
   let weekDay = dayOFTheWeek[datetime.getDay()];
 
   if (path.startsWith("/api")) {
