@@ -16,10 +16,9 @@ const dayOFTheWeek = [
 
 const server = http.createServer((req, res) => {
   const query = url.parse(req.url, true).query;
-  console.log(query);
   const { slack_name, track } = query;
   let datetime = new Date();
-  let utc_time = datetime.toLocaleString();
+  let utc_time = datetime.toISOString();
   let weekDay = dayOFTheWeek[datetime.getDay()];
   if (slack_name && track) {
     const resObj = {
@@ -35,6 +34,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(JSON.stringify(resObj));
     res.end();
+    console.log("resObj sent");
   } else {
     res.writeHead(400, { "Content-Type": "text/plain" });
     res.end('Both "slack_name" and "track" parameters are required.');
