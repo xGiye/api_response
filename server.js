@@ -30,8 +30,8 @@ const server = http.createServer((req, res) => {
         utc_time: utc_time,
         track: track,
         github_file_url:
-          "https://github.com/username/repo/blob/main/file_name.ext",
-        github_repo_url: "https://github.com/username/repo",
+          "https://github.com/xGiye/api_response/blob/main/server.js",
+        github_repo_url: "https://github.com/xGiye/api_response",
         status_code: 200,
       };
       res.writeHead(200, { "Content-Type": "application/json" });
