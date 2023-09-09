@@ -17,11 +17,26 @@ const dayOFTheWeek = [
 const server = http.createServer((req, res) => {
   const query = url.parse(req.url, true).query;
   const path = url.parse(req.url, true).pathname;
-  console.log(url.parse(req.url, true));
+
   const { slack_name, track } = query;
+
+  const timeZone = "Europe/Paris";
+  const options = {
+    timeZone: timeZone,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+  const formatter = new Intl.DateTimeFormat("en-US", options);
+
   let datetime = new Date();
-  let utc_time = datetime.toISOString();
+  let utc_time = formatter.format(datetime);
   let weekDay = dayOFTheWeek[datetime.getDay()];
+
   if (path.startsWith("/api")) {
     if (slack_name && track) {
       const resObj = {
